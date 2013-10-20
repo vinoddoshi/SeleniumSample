@@ -1,0 +1,54 @@
+<?xml version="1.0" ?> 
+<project name="SeleniumSample" default="run">
+
+	<path id="classpath.test">
+	       <fileset dir="lib">
+	         <include name="SeleniumJars/*.jar" />
+	      </fileset>
+	      <pathelement location="src" />
+	      <pathelement location="/Users/pavang/Documents/workspace/JenkinsDemo/build/classes"/>
+	</path>
+
+<!-- _________________________________________________________________________________ -->	 
+	
+
+	
+	<target name="init">
+		<mkdir dir="build"/>
+		
+	</target>
+	
+	<target name="compile" depends="init" >
+		<mkdir dir="build/classes"/>
+		<javac destdir="build/classes" debug="true" srcdir="src">
+			<classpath refid="classpath.test"/>
+		</javac>
+	</target>
+	
+	 <target name="jar" depends="compile">
+	        <mkdir dir="build/jar"/>
+	        <jar destfile="build/jar/TestingSelenium.jar" basedir="build/classes">
+	        	<manifest>
+	                <attribute name="Main-Class" value="sample.TestingSelenium"/>
+	            </manifest>
+	        </jar>
+	 </target>
+	
+    <target name="run" depends="jar" >
+        <java classname="sample.TestingSelenium" fork="true">
+        	<classpath>
+        	     <path refid="classpath.test"/>
+        	     <path location="build/jar/TestingSelenium.jar"/>
+        	 </classpath>
+			
+        </java>
+    </target>
+		
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+</project>
+
+
+
+
