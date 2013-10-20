@@ -1,14 +1,19 @@
 <?xml version="1.0" ?> 
-<project name="SeleniumSample" default="run">
+<project name="SeleniumSample" default="jar">
 
 	<path id="classpath.test">
 	       <fileset dir="lib">
 	         <include name="SeleniumJars/*.jar" />
 	      </fileset>
 	      <pathelement location="src" />
-	      <pathelement location="/Users/pavang/Documents/workspace/JenkinsDemo/build/classes"/>
+	      <pathelement location="/Users/pavang/Projects/github/SeleniumSample/build/classes"/>
 	</path>
 
+	<taskdef name="testng" classname="org.testng.TestNGAntTask">
+		    <classpath>
+		      <pathelement location="/Users/pavang/Projects/github/SeleniumSample/lib/SeleniumJars/testng-6.8.jar"/> 
+		    </classpath>
+	</taskdef>
 <!-- _________________________________________________________________________________ -->	 
 	
 
@@ -39,13 +44,19 @@
         	<classpath>
         	     <path refid="classpath.test"/>
         	     <path location="build/jar/TestingSelenium.jar"/>
-        	 </classpath>
-			
+        	 </classpath>		
         </java>
     </target>
 		
 	<target name="clean">
 		<delete dir="build" />
+	</target>
+	
+	
+	<target name="runTest" depends="jar">
+			<testng classpathref="classpath.test">
+					<xmlfileset dir="." includes="testng.xml"/>
+			</testng>
 	</target>
 </project>
 
