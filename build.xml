@@ -6,12 +6,12 @@
 	         <include name="SeleniumJars/*.jar" />
 	      </fileset>
 	      <pathelement location="src" />
-	      <pathelement location="/Users/pavang/Projects/github/SeleniumSample/build/classes"/>
+	      <pathelement location="build/classes"/>
 	</path>
 
 	<taskdef name="testng" classname="org.testng.TestNGAntTask">
 		    <classpath>
-		      <pathelement location="/Users/pavang/Projects/github/SeleniumSample/lib/SeleniumJars/testng-6.8.jar"/> 
+		      <pathelement location="lib/SeleniumJars/testng-6.8.jar"/> 
 		    </classpath>
 	</taskdef>
 <!-- _________________________________________________________________________________ -->	 
